@@ -1,6 +1,6 @@
 module PagSeguro
   class Document
-    include Extensions::MassAssignment
+    include Extensions::Assignment
 
     # Set the type.
     attr_accessor :type

@@ -1,6 +1,6 @@
 module PagSeguro
   class Notification
-    include PagSeguro::Extensions::MassAssignment
+    include PagSeguro::Extensions::Assignment
 
     # The notification code sent by PagSeguro.
     attr_accessor :code

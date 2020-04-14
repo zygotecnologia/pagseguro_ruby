@@ -1,6 +1,6 @@
 module PagSeguro
   class Item
-    include Extensions::MassAssignment
+    include Extensions::Assignment
 
     # Set the product identifier, such as SKU.
     attr_accessor :id

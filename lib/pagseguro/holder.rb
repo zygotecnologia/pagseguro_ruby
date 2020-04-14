@@ -1,6 +1,6 @@
 module PagSeguro
   class Holder
-    include Extensions::MassAssignment
+    include Extensions::Assignment
     include Extensions::EnsureType
 
     # Set the name.

@@ -18,6 +18,10 @@ module PagSeguro
       "creditCard"
     end
 
+    def payment_mode
+      "default"
+    end
+
     # Set the installment.
     # Required for credit card payment method.
     def installment=(installment)
@@ -28,6 +32,10 @@ module PagSeguro
     # Required for credit card payment method.
     def holder=(holder)
       @holder = ensure_type(Holder, holder)
+    end
+
+    def primary_receiver=(primary_receiver)
+      @primary_receiver = ensure_type(PrimaryReceiver, primary_receiver)
     end
 
     # Set the billing address.

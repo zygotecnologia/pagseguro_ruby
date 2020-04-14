@@ -1,7 +1,6 @@
 module PagSeguro
   class TransactionRequest
     class RequestSerializer
-      # The transaction request that will be serialized.
       attr_reader :transaction_request
 
       def initialize(transaction_request)
@@ -162,7 +161,7 @@ module PagSeguro
       end
 
       def xml_builder
-        Nokogiri::XML::Builder.new(encoding: PagSeguro.encoding) do |xml|
+        Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
           xml.send(:payment) {
             xml.mode transaction_request.payment_mode
             xml.method_ transaction_request.payment_method
@@ -171,11 +170,20 @@ module PagSeguro
             xml.extraAmount to_amount(transaction_request.extra_amount || 0)
             xml.reference transaction_request.reference
 
+            xml_serialize_primary_receiver(xml, transaction_request.primary_receiver)
             xml_serialize_sender(xml, transaction_request.sender)
             xml_serialize_items(xml, transaction_request.items)
             xml_serialize_receivers(xml, transaction_request.receivers)
             xml_serialize_shipping(xml, transaction_request.shipping)
             xml_serialize_credit_card(xml)
+          }
+        end
+      end
+
+      def xml_serialize_primary_receiver(xml, primary_receiver)
+        if primary_receiver
+          xml.send(:primaryReceiver) {
+            xml.send(:publicKey, primary_receiver.public_key)
           }
         end
       end

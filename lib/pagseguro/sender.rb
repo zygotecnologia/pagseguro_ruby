@@ -1,6 +1,6 @@
 module PagSeguro
   class Sender
-    include Extensions::MassAssignment
+    include Extensions::Assignment
     include Extensions::EnsureType
 
     # Get the sender phone.

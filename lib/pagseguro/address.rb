@@ -1,7 +1,7 @@
 module PagSeguro
   # Set the shipping address information.
   class Address
-    include Extensions::MassAssignment
+    include Extensions::Assignment
 
     # Set the street name.
     attr_accessor :street

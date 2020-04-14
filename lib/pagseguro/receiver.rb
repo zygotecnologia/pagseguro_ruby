@@ -1,6 +1,6 @@
 module PagSeguro
   class Receiver
-    include Extensions::MassAssignment
+    include Extensions::Assignment
     include Extensions::EnsureType
 
     # Set receiver's email.

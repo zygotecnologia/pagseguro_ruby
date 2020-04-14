@@ -1,6 +1,6 @@
 module PagSeguro
   class Phone
-    include Extensions::MassAssignment
+    include Extensions::Assignment
 
     # Set the type phone
     # Must be HOME, MOBILE or BUSINESS
