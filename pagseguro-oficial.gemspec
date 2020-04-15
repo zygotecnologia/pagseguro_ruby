@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 1.9.3"
 
-  spec.add_runtime_dependency "aitch", "~> 0.2"
+  spec.add_runtime_dependency "aitch", "~> 1.1"
   spec.add_runtime_dependency "nokogiri", "~> 1.6"
   spec.add_runtime_dependency "i18n", "~> 0.7"
   spec.add_runtime_dependency "json", "~> 1.8"

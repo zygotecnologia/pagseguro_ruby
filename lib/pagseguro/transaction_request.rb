@@ -1,6 +1,6 @@
 module PagSeguro
   class TransactionRequest
-    include Extensions::MassAssignment
+    include Extensions::Assignment
     include Extensions::EnsureType
     include Extensions::Credentiable
 
@@ -106,12 +106,9 @@ module PagSeguro
     # Calls the PagSeguro web service and create this request for payment.
     # Return boolean.
     def create
-      # request = if receivers.empty?
-      #             Request.post('transactions', api_version, params)
-      #           else
-      #             Request.post_xml('transactions/', nil, credentials, xml_params)
-      #           end
-      request = Request.post_xml('transactions/', nil, credentials, xml_params)
+      headers = { "Accept" => "application/vnd.pagseguro.com.br.v3+xml" }
+      request = Request.post_xml('transactions/', nil, credentials, xml_params, { headers: headers })
+
       Response.new(request, self).serialize
     end
 
