@@ -50,7 +50,7 @@ module PagSeguro
     def post_xml(path, api_version, credentials, data = '', options={})
       credentials_params = credentials_to_params(credentials)
       url_path = [api_version, path].reject(&:nil?).join('/')
-binding.pry
+
       request.post do
         url PagSeguro.api_url("#{url_path}?#{credentials_params}")
         headers "Content-Type" => "application/xml; charset=#{PagSeguro.encoding}"
@@ -79,7 +79,6 @@ binding.pry
     # Perform the specified HTTP request. It will include the API credentials,
     # api_version, encoding and additional headers.
     def execute(request_method, path, api_version, data, headers) # :nodoc:
-      binding.pry
       request.public_send(
         request_method,
         PagSeguro.api_url("#{api_version}/#{path}"),
