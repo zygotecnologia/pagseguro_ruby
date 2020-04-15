@@ -1,14 +1,14 @@
 module PagSeguro
   class AccountCredentials
-    # The user email
-    attr_accessor :email
+    # The account app_id
+    attr_accessor :app_id
 
-    # The token related to the user
-    attr_accessor :token
+    # The account app_key
+    attr_accessor :app_key
 
-    def initialize(email, token)
-      @email = email
-      @token = token
+    def initialize(app_id, app_key)
+      @app_id = app_id
+      @app_key = app_key
     end
   end
 end

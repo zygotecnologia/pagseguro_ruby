@@ -162,7 +162,7 @@ module PagSeguro
 
   # Returns an object with the configured account credentials
   def self.account_credentials
-    PagSeguro::AccountCredentials.new(PagSeguro.email, PagSeguro.token)
+    PagSeguro::AccountCredentials.new(PagSeguro.app_id, PagSeguro.app_key)
   end
 
   # Returns an object with the configured application credentials
