@@ -119,7 +119,7 @@ module PagSeguro
         xml.send(:holder) {
           xml.send(:name, holder.name) if holder.name
           xml.send(:birthDate, holder.birth_date) if holder.birth_date
-          serialize_document(xml, holder.document)
+          serialize_documents(xml, holder.documents)
           serialize_billing_address(xml, holder.billing_address)
           serialize_phone(xml, holder.phone)
         }

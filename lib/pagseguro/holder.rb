@@ -18,9 +18,19 @@ module PagSeguro
     # Get the billing address
     attr_reader :billing_address
 
-    # Set the document.
+    def documents
+      @documents ||= Documents.new
+    end
+
+    def documents=(_documents=[])
+      _documents.each do |document|
+        documents << document
+      end
+    end
+
+    # Set the sender document.
     def document=(document)
-      @document = ensure_type(Document, document)
+      documents << ensure_type(Document, document)
     end
 
     # Set the phone.
