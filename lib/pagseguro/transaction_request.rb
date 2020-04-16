@@ -102,9 +102,7 @@ module PagSeguro
     end
 
     def create
-      headers = { "Accept" => "application/vnd.pagseguro.com.br.v3+xml" }
-
-      request = Request.post_xml('transactions/', nil, credentials, xml_params, { headers: headers })
+      request = Request.post_xml('transactions/', api_version, credentials, xml_params)
 
       Response.new(request, self).serialize
     end
