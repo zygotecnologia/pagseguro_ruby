@@ -254,6 +254,8 @@ module PagSeguro
         return unless shipping
 
         xml.send(:shipping) do
+          xml.send(:addressRequired, shipping.address_required)
+
           if shipping.address
             xml.send(:address) do
               xml.send(:street, shipping.address.street)
