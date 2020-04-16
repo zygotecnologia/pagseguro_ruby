@@ -93,20 +93,17 @@ module PagSeguro
       raise NotImplementedError.new("'#payment_method' must be implemented in specific class")
     end
 
-    # Set the payment sender.
     def sender=(sender)
       @sender = ensure_type(Sender, sender)
     end
 
-    # Set the shipping info.
     def shipping=(shipping)
       @shipping = ensure_type(Shipping, shipping)
     end
 
-    # Calls the PagSeguro web service and create this request for payment.
-    # Return boolean.
     def create
       headers = { "Accept" => "application/vnd.pagseguro.com.br.v3+xml" }
+
       request = Request.post_xml('transactions/', nil, credentials, xml_params, { headers: headers })
 
       Response.new(request, self).serialize
@@ -116,7 +113,6 @@ module PagSeguro
       attrs.map { |name, value| send("#{name}=", value) }
     end
 
-    # Set the receivers.
     def receivers=(receivers)
       @receivers = receivers.map do |receiver|
                      ensure_type(Receiver, receiver)
