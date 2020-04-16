@@ -10,24 +10,23 @@ module PagSeguro
     # Define the error class for invalid type assignment.
     InvalidShippingTypeError = Class.new(StandardError)
 
-    include Extensions::MassAssignment
+    include Extensions::Assignment
     include Extensions::EnsureType
 
-    # Define the shipping type id.
     attr_reader :type_id
-
-    # Get the shipping type name.
     attr_reader :type_name
-
-    # Get the address object.
     attr_reader :address
 
-    # Set the shipping cost.
     attr_accessor :cost
+    attr_accessor :address_required
 
     # Set the shipping address info.
     def address=(address)
       @address = ensure_type(Address, address)
+    end
+
+    def address_required=(address_required)
+      @address_required = address_required
     end
 
     # Set the shipping type.

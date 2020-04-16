@@ -1,6 +1,6 @@
 module PagSeguro
   class TransactionRequest
-    include Extensions::MassAssignment
+    include Extensions::Assignment
     include Extensions::EnsureType
     include Extensions::Credentiable
 
@@ -93,24 +93,16 @@ module PagSeguro
       raise NotImplementedError.new("'#payment_method' must be implemented in specific class")
     end
 
-    # Set the payment sender.
     def sender=(sender)
       @sender = ensure_type(Sender, sender)
     end
 
-    # Set the shipping info.
     def shipping=(shipping)
       @shipping = ensure_type(Shipping, shipping)
     end
 
-    # Calls the PagSeguro web service and create this request for payment.
-    # Return boolean.
     def create
-      request = if receivers.empty?
-                  Request.post('transactions', api_version, params)
-                else
-                  Request.post_xml('transactions/', nil, credentials, xml_params)
-                end
+      request = Request.post_xml('transactions/', api_version, credentials, xml_params)
 
       Response.new(request, self).serialize
     end
@@ -119,7 +111,6 @@ module PagSeguro
       attrs.map { |name, value| send("#{name}=", value) }
     end
 
-    # Set the receivers.
     def receivers=(receivers)
       @receivers = receivers.map do |receiver|
                      ensure_type(Receiver, receiver)
