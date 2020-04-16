@@ -263,7 +263,6 @@ module PagSeguro
               xml.send(:street, shipping.address.street)
               xml.send(:number, shipping.address.number)
               xml.send(:district, shipping.address.district)
-              xml.send(:country, shipping.address.country)
               xml.send(:postalCode, shipping.address.postal_code)
               xml.send(:city, shipping.address.city)
               xml.send(:state, shipping.address.state)
