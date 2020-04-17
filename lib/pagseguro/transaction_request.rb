@@ -102,9 +102,11 @@ module PagSeguro
     end
 
     def create
-      request = Request.post_xml('transactions/', api_version, credentials, xml_params)
+      Response.new(create_request_transaction, self).serialize
+    end
 
-      Response.new(request, self).serialize
+    def create_request_transaction
+      Request.post_xml('transactions/', api_version, credentials, xml_params)
     end
 
     def update_attributes(attrs)
