@@ -102,7 +102,11 @@ module PagSeguro
     end
 
     def create
-      Response.new(create_request_transaction, self).serialize
+      response = create_request_transaction
+      {
+        response_serialize: Response.new(response, self).serialize,
+        response_xml: response.body
+      }
     end
 
     def create_request_transaction
