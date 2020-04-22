@@ -79,9 +79,11 @@ module PagSeguro
     # Perform the specified HTTP request. It will include the API credentials,
     # api_version, encoding and additional headers.
     def execute(request_method, path, api_version, data, headers) # :nodoc:
+      url_path = [api_version, path].reject(&:nil?).join('/')
+
       request.public_send(
         request_method,
-        PagSeguro.api_url("#{api_version}/#{path}"),
+        PagSeguro.api_url(url_path),
         extended_data(data),
         extended_headers(request_method, headers)
       )
