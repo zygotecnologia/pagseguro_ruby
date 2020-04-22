@@ -6,7 +6,7 @@ module PagSeguro
     attr_accessor :result
 
     def register
-      response_request = Request.post(url_total_refund, nil, params)
+      response_request = Request.post(url_total_refund, nil, {}, headers)
       Response.new(response_request, self).serialize
     end
 
@@ -25,6 +25,10 @@ module PagSeguro
 
     def params
       RequestSerializer.new(self).to_params
+    end
+
+    def headers
+      { 'Accept': 'application/vnd.pagseguro.com.br.v3+xml' }
     end
   end
 end
