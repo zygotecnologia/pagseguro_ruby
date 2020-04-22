@@ -36,8 +36,9 @@ module PagSeguro
     # # +data+: the data that will be sent as body data. Must be a Hash.
     # # +headers+: any additional header that will be sent through the request.
     #
-    def post(path, api_version, data = {}, headers = {})
-      execute :post, path, api_version, data, headers
+    def post(path, api_version, data = {}, headers = {}, credentials = nil)
+      credentials_params = credentials_to_params(credentials)
+      execute :post, path, api_version, data, headers, credentials_params
     end
 
     # Perform a POST request, sending XML data.
@@ -78,12 +79,12 @@ module PagSeguro
 
     # Perform the specified HTTP request. It will include the API credentials,
     # api_version, encoding and additional headers.
-    def execute(request_method, path, api_version, data, headers) # :nodoc:
+    def execute(request_method, path, api_version, data, headers, credentials) # :nodoc:
       url_path = [api_version, path].reject(&:nil?).join('/')
 
       request.public_send(
         request_method,
-        PagSeguro.api_url(url_path),
+        PagSeguro.api_url("#{url_path}?#{credentials_params}"),
         extended_data(data),
         extended_headers(request_method, headers)
       )
@@ -122,6 +123,8 @@ module PagSeguro
     end
 
     def credentials_to_params(credentials)
+      return '' if credentials.nil?
+
       credentials_object(credentials: credentials)
         .delete_if { |_, value| value.nil? }
         .map { |key, value| "#{key}=#{value}" }
