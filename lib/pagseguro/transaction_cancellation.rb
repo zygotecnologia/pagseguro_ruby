@@ -7,7 +7,7 @@ module PagSeguro
     attr_accessor :result
 
     def register
-      response_request = Request.post("transactions/cancels", api_version, params)
+      response_request = Request.post("transactions/cancels", api_version, params, headers, credentials)
       Response.new(response_request, self).serialize
     end
 
@@ -26,6 +26,10 @@ module PagSeguro
 
     def params
       RequestSerializer.new(self).to_params
+    end
+
+    def headers
+      {}
     end
   end
 end
