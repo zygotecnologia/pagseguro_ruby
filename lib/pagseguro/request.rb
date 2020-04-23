@@ -14,8 +14,9 @@ module PagSeguro
     # # +data+: the data that will be sent as query string. Must be a Hash.
     # # +headers+: any additional header that will be sent through the request.
     #
-    def get(path, api_version, data = {}, headers = {})
-      execute :get, path, api_version, data, headers
+    def get(path, api_version, data = {}, headers = {}, credentials=nil)
+      credentials_params = credentials_to_params(credentials)
+      execute :get, path, api_version, data, headers, credentials_params
     end
 
     def get_with_auth_on_url(path, api_version, credentials)

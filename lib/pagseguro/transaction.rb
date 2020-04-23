@@ -75,8 +75,8 @@ module PagSeguro
 
     # Find a transaction by its notificationCode.
     # Return a PagSeguro::Transaction instance.
-    def self.find_by_notification_code(code, options = {})
-      load_from_response send_request("transactions/notifications/#{code}", options)
+    def self.find_by_notification_code(code, options = {}, credentials = nil)
+      load_from_response send_request("transactions/notifications/#{code}", options, credentials)
     end
 
     # Search transactions within a date range.
@@ -208,8 +208,8 @@ module PagSeguro
     end
 
     # Send a get request to v3 API version, with the path given
-    def self.send_request(path, options = {})
-      Request.get(path, api_version, options)
+    def self.send_request(path, options = {}, credentials = nil)
+      Request.get(path, api_version, options, {}, credentials)
     end
   end
 end
