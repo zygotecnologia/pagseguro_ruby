@@ -1,12 +1,13 @@
 module PagSeguro
   class TransactionSplitTotalRefund
     include Extensions::Assignment
+    include Extensions::Credentiable
 
     attr_accessor :transaction_code
     attr_accessor :result
 
     def register
-      response_request = Request.post(url_total_refund, nil, {}, headers)
+      response_request = Request.post(url_total_refund, nil, {}, headers, credentials)
       Response.new(response_request, self).serialize
     end
 
