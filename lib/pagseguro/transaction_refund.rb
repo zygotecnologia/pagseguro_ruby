@@ -1,6 +1,7 @@
 module PagSeguro
   class TransactionRefund
     include Extensions::MassAssignment
+    include Extensions::Credentiable
 
     # Set the transaction code.
     # The transaction status must be: Paga (3), Disponível (4), Em disputa (5)
@@ -11,16 +12,11 @@ module PagSeguro
     # If not informed, PagSeguro will assume the total transaction value.
     attr_accessor :value
 
-    # Result from request.
     attr_accessor :result
-
-    # PagSeguro::Errors object.
     attr_reader :errors
 
-    # Calls the PagSeguro webservice and register the refund.
-    # Return PagSeguro::TransactionRefund.
     def register
-      response_request = Request.post("transactions/refunds", api_version, params)
+      response_request = Request.post("transactions/refunds", api_version, params, headers, credentials)
       Response.new(response_request, self).serialize
     end
 
@@ -39,6 +35,10 @@ module PagSeguro
 
     def params
       RequestSerializer.new(self).to_params
+    end
+
+    def headers
+      {}
     end
   end
 end
